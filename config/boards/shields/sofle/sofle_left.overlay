@@ -7,22 +7,37 @@
 #include "sofle.dtsi"
 
 &kscan0 {
-    col-gpios
-        = <&pro_micro 19 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 18 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 15 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 14 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 16 GPIO_ACTIVE_HIGH>
-        , <&pro_micro 10 GPIO_ACTIVE_HIGH>
-        ;
+    col-gpios = <&pro_micro 19 GPIO_ACTIVE_HIGH>,
+                <&pro_micro 18 GPIO_ACTIVE_HIGH>,
+                <&pro_micro 15 GPIO_ACTIVE_HIGH>,
+                <&pro_micro 14 GPIO_ACTIVE_HIGH>,
+                <&pro_micro 16 GPIO_ACTIVE_HIGH>,
+                <&pro_micro 10 GPIO_ACTIVE_HIGH>;
 };
 
 &left_encoder {
     status = "okay";
 };
+
+&i2c1 {
+    status = "okay";
+
+    ssd1306: ssd1306@3C {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3C>;
+        label = "SSD1306";
+        width = <128>;
+        height = <32>;
+        segment-offset = <0>;
+        page-offset = <0>;
+        display-offset = <0>;
+        rotation = <0>;
+    };
+};
+
 / {
     chosen {
-      zmk,battery = &vbatt;
+        zmk,battery = &vbatt;
     };
 
     vbatt: vbatt {
